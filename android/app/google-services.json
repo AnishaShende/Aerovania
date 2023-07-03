@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "807752046700",
+    "project_id": "aerovania-app",
+    "storage_bucket": "aerovania-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807752046700:android:c65768754343d871c66049",
+        "android_client_info": {
+          "package_name": "com.example.aerovania_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807752046700-dlt2c1qnolr42r89p5ljkod4pf7rk0mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb3221eb_rpyiM4TjjEh0k1jtctXmVkHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807752046700-dlt2c1qnolr42r89p5ljkod4pf7rk0mt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807752046700-4lntjtvqjmgcjhc95ebnmnevgrik7uce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aerovaniaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
