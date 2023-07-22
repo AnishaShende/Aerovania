@@ -1,5 +1,5 @@
 import 'package:aerovania_app/Pages/splash_screen.dart';
-import 'package:aerovania_app/services/auth/auth_servieces.dart';
+import 'package:aerovania_app/services/auth/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
