@@ -1,13 +1,16 @@
-// import 'package:aerovania_app/Pages/home_screen.dart';
-// import 'package:aerovania_app/services/auth/auth_servieces.dart';
 import 'package:aerovania_app/Pages/bottom%20navigation%20bar/search_page.dart';
 import 'package:aerovania_app/Pages/side%20navigation%20bar/product_screen.dart';
 import 'package:aerovania_app/Pages/side%20navigation%20bar/settings_screen.dart';
+import 'package:aerovania_app/utils/data.dart';
+import 'package:aerovania_app/widgets/notification_box.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
-
+import 'package:aerovania_app/components/color.dart';
+import 'package:aerovania_app/widgets/category_box.dart';
+import 'package:aerovania_app/widgets/feature_item.dart';
+import 'package:aerovania_app/widgets/recommend_item.dart';
 import 'bottom navigation bar/cart_page.dart';
 import 'bottom navigation bar/favorite_page.dart';
 import 'side navigation bar/about_screen.dart';
@@ -16,27 +19,25 @@ import 'side navigation bar/course_screen.dart';
 import 'side navigation bar/history_screen.dart';
 import 'side navigation bar/home_screen.dart';
 import 'side navigation bar/media_screen.dart';
-// import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-// import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-// import 'settings_screen.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  // const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-final List<Widget> _sidenavpages = [
-  const HomeScreen(),
-  const CourseScreen(),
-  const ProductScreen(),
-  const HistoryScreen(),
-  const MediaScreen(),
-  const SettingsScreen(),
-  const AboutScreen(),
-  const ContactScreen()
-];
+// final List<Widget> _sidenavpages = [
+//   const HomeScreen(),
+//   const CourseScreen(),
+//   const ProductScreen(),
+//   const HistoryScreen(),
+//   const MediaScreen(),
+//   const SettingsScreen(),
+//   const AboutScreen(),
+//   const ContactScreen()
+// ];
 
 final List<Widget> _bottomnavpages = [
   const HomeScreen(),
@@ -45,9 +46,9 @@ final List<Widget> _bottomnavpages = [
   const FavoriteScreen()
 ];
 
-var selectedIndex = 0;
 
 class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
   // final int _page = 0;
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
@@ -81,14 +82,15 @@ class _HomePageState extends State<HomePage> {
                   // if (!Platform.isAndroid && !Platform.isIOS) {
                   //   _controller.setExtended(true);
                   // }
-                  _key.currentState?.openDrawer();
+                  // _key.currentState?.openDrawer();
+                  Scaffold.of(context).openDrawer();
                 },
                 icon: const Icon(Icons.menu),
               ),
             )
           : null,
       drawer: ExampleSidebarX(controller: _controller),
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: AppColor.appBgColor,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blueAccent,
         index: selectedIndex,
@@ -114,15 +116,21 @@ class _HomePageState extends State<HomePage> {
         //   //Handle button tap
         // },
       ),
-      body: Row(
-        children: [
-          if (!isSmallScreen) ExampleSidebarX(controller: _controller),
-          Expanded(
-            child: _bottomnavpages[selectedIndex],
-            // _ScreensExample(
-            //   controller: _controller,
-            // ),
-          ),
+      body: CustomScrollView(
+        slivers: [
+      SliverAppBar(
+        backgroundColor: AppColor.appBarColor,
+        pinned: true,
+        snap: true,
+        floating: true,
+        title: _buildAppBar(),
+      ),
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => _buildBody(),
+          childCount: 1,
+        ),
+      )
         ],
       ),
       // Container(
@@ -174,6 +182,151 @@ class _HomePageState extends State<HomePage> {
       // ),
     );
   }
+
+  Widget _buildAppBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                profile["name"]!,
+                style: const TextStyle(
+                  color: AppColor.labelColor,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Text(
+                "Good Morning!",
+                style: TextStyle(
+                  color: AppColor.textColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+        ),
+        NotificationBox(
+          notifiedNumber: 1,
+        )
+      ],
+    );
+  }
+
+  _buildBody() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCategories(),
+          const SizedBox(
+            height: 15,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+            child: Text(
+              "Featured",
+              style: TextStyle(
+                color: AppColor.textColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          _buildFeatured(),
+          const SizedBox(
+            height: 15,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Recommended",
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      color: AppColor.textColor),
+                ),
+                Text(
+                  "See all",
+                  style: TextStyle(fontSize: 14, color: AppColor.darker),
+                ),
+              ],
+            ),
+          ),
+          _buildRecommended(),
+        ],
+      ),
+    );
+  }
+
+   _buildCategories() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          categories.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: CategoryBox(
+              selectedColor: Colors.white,
+              data: categories[index],
+              onTap: null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildFeatured() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 290,
+        enlargeCenterPage: true,
+        disableCenter: true,
+        viewportFraction: .75,
+      ),
+      items: List.generate(
+        features.length,
+        (index) => FeatureItem(
+          // key: ValueKey(features[index].id), // Added
+          data: features[index],
+        ),
+      ),
+    );
+  }
+
+  _buildRecommended() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          recommends.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: RecommendItem(
+              // key: ValueKey(recommends[index].id), // Added
+              data: recommends[index],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
 
 class ExampleSidebarX extends StatelessWidget {

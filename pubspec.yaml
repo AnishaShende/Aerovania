@@ -45,6 +45,11 @@ dependencies:
   sidebarx: ^0.16.0
   curved_navigation_bar: ^1.0.3
   pinput: ^2.2.31
+  flutter_svg: ^2.0.7
+  cached_network_image: ^3.2.3
+  badges: ^3.1.1
+  carousel_slider: ^4.0.0
+  # flutter_carousel_slider: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +76,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/icons/
+    - assets/icons/categories/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
