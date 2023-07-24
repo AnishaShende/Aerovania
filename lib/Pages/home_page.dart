@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isSmallScreen = MediaQuery.of(context).size.width < 600;
+    // final isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
       key: _key,
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
       drawer: ExampleSidebarX(controller: _controller),
       backgroundColor: AppColor.appBgColor,
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.transparent,
         index: selectedIndex,
         items: const <Widget>[
           Icon(Icons.add, size: 30),
@@ -117,27 +117,38 @@ class _HomePageState extends State<HomePage> {
         //   //Handle button tap
         // },
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: AppColor.appBarColor,
-            pinned: true,
-            snap: true,
-            floating: true,
-            title: _buildAppBar(),
+      body:  Row(
+        children: [
+          // if (!isSmallScreen) ExampleSidebarX(controller: _controller),
+          Expanded(
+            child: _bottomnavpages[selectedIndex],
+            // _ScreensExample(
+            //   controller: _controller,
+            // ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => _buildBody(),
-              childCount: 1,
-            ),
-          ),
-        //   SliverToBoxAdapter(
-        //     child: _bottomnavpages[selectedIndex],
-        // ),
-          // _bottomnavpages[selectedIndex],
         ],
       ),
+      // CustomScrollView(
+      //   slivers: [
+      //     SliverAppBar(
+      //       backgroundColor: AppColor.appBarColor,
+      //       pinned: true,
+      //       snap: true,
+      //       floating: true,
+      //       title: _buildAppBar(),
+      //     ),
+      //     SliverList(
+      //       delegate: SliverChildBuilderDelegate(
+      //         (context, index) => _buildBody(),
+      //         childCount: 1,
+      //       ),
+      //     ),
+      //   //   SliverToBoxAdapter(
+      //   //     child: _bottomnavpages[selectedIndex],
+      //   // ),
+      //     // _bottomnavpages[selectedIndex],
+      //   ],
+      // ),
 
       // Container(
       //     color: Colors.blueAccent,
@@ -189,150 +200,150 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAppBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                profile["name"]!,
-                style: const TextStyle(
-                  color: AppColor.labelColor,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              const Text(
-                "Good Morning!",
-                style: TextStyle(
-                  color: AppColor.textColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        ),
-        NotificationBox(
-          notifiedNumber: 1,
-        )
-      ],
-    );
-  }
+//   Widget _buildAppBar() {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Expanded(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text(
+//                 profile["name"]!,
+//                 style: const TextStyle(
+//                   color: AppColor.labelColor,
+//                   fontSize: 14,
+//                 ),
+//               ),
+//               const SizedBox(
+//                 height: 5,
+//               ),
+//               const Text(
+//                 "Good Morning!",
+//                 style: TextStyle(
+//                   color: AppColor.textColor,
+//                   fontWeight: FontWeight.w500,
+//                   fontSize: 18,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         NotificationBox(
+//           notifiedNumber: 1,
+//         )
+//       ],
+//     );
+//   }
 
-  _buildBody() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildCategories(),
-          const SizedBox(
-            height: 15,
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-            child: Text(
-              "Featured",
-              style: TextStyle(
-                color: AppColor.textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-              ),
-            ),
-          ),
-          _buildFeatured(),
-          const SizedBox(
-            height: 15,
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Recommended",
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.textColor),
-                ),
-                Text(
-                  "See all",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
-            ),
-          ),
-          _buildRecommended(),
-          // _bottomnavpages[selectedIndex],
-        ],
-      ),
-    );
-  }
+//   _buildBody() {
+//     return SingleChildScrollView(
+//       padding: const EdgeInsets.symmetric(vertical: 10),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           _buildCategories(),
+//           const SizedBox(
+//             height: 15,
+//           ),
+//           const Padding(
+//             padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+//             child: Text(
+//               "Featured",
+//               style: TextStyle(
+//                 color: AppColor.textColor,
+//                 fontWeight: FontWeight.w600,
+//                 fontSize: 24,
+//               ),
+//             ),
+//           ),
+//           _buildFeatured(),
+//           const SizedBox(
+//             height: 15,
+//           ),
+//           const Padding(
+//             padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 Text(
+//                   "Recommended",
+//                   style: TextStyle(
+//                       fontSize: 22,
+//                       fontWeight: FontWeight.w600,
+//                       color: AppColor.textColor),
+//                 ),
+//                 Text(
+//                   "See all",
+//                   style: TextStyle(fontSize: 14, color: AppColor.darker),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           _buildRecommended(),
+//           // _bottomnavpages[selectedIndex],
+//         ],
+//       ),
+//     );
+//   }
 
-  _buildCategories() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-          categories.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: CategoryBox(
-              selectedColor: Colors.white,
-              data: categories[index],
-              onTap: null,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+//   _buildCategories() {
+//     return SingleChildScrollView(
+//       padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: List.generate(
+//           categories.length,
+//           (index) => Padding(
+//             padding: const EdgeInsets.only(right: 15),
+//             child: CategoryBox(
+//               selectedColor: Colors.white,
+//               data: categories[index],
+//               onTap: null,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
-  _buildFeatured() {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 290,
-        enlargeCenterPage: true,
-        disableCenter: true,
-        viewportFraction: .75,
-      ),
-      items: List.generate(
-        features.length,
-        (index) => FeatureItem(
-          // key: ValueKey(features[index].id), // Added
-          data: features[index],
-        ),
-      ),
-    );
-  }
+//   _buildFeatured() {
+//     return CarouselSlider(
+//       options: CarouselOptions(
+//         height: 290,
+//         enlargeCenterPage: true,
+//         disableCenter: true,
+//         viewportFraction: .75,
+//       ),
+//       items: List.generate(
+//         features.length,
+//         (index) => FeatureItem(
+//           // key: ValueKey(features[index].id), // Added
+//           data: features[index],
+//         ),
+//       ),
+//     );
+//   }
 
-  _buildRecommended() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-          recommends.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: RecommendItem(
-              // key: ValueKey(recommends[index].id), // Added
-              data: recommends[index],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+//   _buildRecommended() {
+//     return SingleChildScrollView(
+//       padding: const EdgeInsets.fromLTRB(15, 5, 0, 5),
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: List.generate(
+//           recommends.length,
+//           (index) => Padding(
+//             padding: const EdgeInsets.only(right: 10),
+//             child: RecommendItem(
+//               // key: ValueKey(recommends[index].id), // Added
+//               data: recommends[index],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 }
 
 class ExampleSidebarX extends StatelessWidget {
