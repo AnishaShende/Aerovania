@@ -21,23 +21,11 @@ import 'side navigation bar/home_screen.dart';
 import 'side navigation bar/media_screen.dart';
 
 class HomePage extends StatefulWidget {
-  // const HomePage({super.key});
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
-// final List<Widget> _sidenavpages = [
-//   const HomeScreen(),
-//   const CourseScreen(),
-//   const ProductScreen(),
-//   const HistoryScreen(),
-//   const MediaScreen(),
-//   const SettingsScreen(),
-//   const AboutScreen(),
-//   const ContactScreen()
-// ];
 
 final List<Widget> _bottomnavpages = [
   const HomeScreen(),
@@ -46,10 +34,15 @@ final List<Widget> _bottomnavpages = [
   const FavoriteScreen()
 ];
 
-
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
-  // final int _page = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = 0;
+  }
+
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
   // final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -68,27 +61,27 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _key,
-      appBar: isSmallScreen
-          ? AppBar(
-              backgroundColor: canvasColor,
-              title: Text(_getTitleByIndex(_controller.selectedIndex)),
-              leading: IconButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => _pages[_controller.selectedIndex]),
-                  // );
-                  // _pages[_controller.selectedIndex];
-                  // if (!Platform.isAndroid && !Platform.isIOS) {
-                  //   _controller.setExtended(true);
-                  // }
-                  // _key.currentState?.openDrawer();
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(Icons.menu),
-              ),
-            )
-          : null,
+      // appBar: isSmallScreen
+      //     ? AppBar(
+      //         backgroundColor: canvasColor,
+      //         title: Text(_getTitleByIndex(_controller.selectedIndex)),
+      //         leading: IconButton(
+      //           onPressed: () {
+      //             // Navigator.push(
+      //             //   context,
+      //             //   MaterialPageRoute(builder: (context) => _pages[_controller.selectedIndex]),
+      //             // );
+      //             // _pages[_controller.selectedIndex];
+      //             // if (!Platform.isAndroid && !Platform.isIOS) {
+      //             //   _controller.setExtended(true);
+      //             // }
+      //             // _key.currentState?.openDrawer();
+      //             Scaffold.of(context).openDrawer();
+      //           },
+      //           icon: const Icon(Icons.menu),
+      //         ),
+      //       )
+      //     : null,
       drawer: ExampleSidebarX(controller: _controller),
       backgroundColor: AppColor.appBgColor,
       bottomNavigationBar: CurvedNavigationBar(
@@ -102,9 +95,17 @@ class _HomePageState extends State<HomePage> {
         ],
         onTap: (int index) {
           selectedIndex = index;
+          // // _bottomnavpages[selectedIndex];
+          // // Expanded(
+          // //   child: _bottomnavpages[selectedIndex],
+          // // );
           setState(() {
             selectedIndex = index;
           });
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => _bottomnavpages[index]),
+          // );
         },
         letIndexChange: (index) => true,
         // onTap: (index) {
@@ -118,21 +119,26 @@ class _HomePageState extends State<HomePage> {
       ),
       body: CustomScrollView(
         slivers: [
-      SliverAppBar(
-        backgroundColor: AppColor.appBarColor,
-        pinned: true,
-        snap: true,
-        floating: true,
-        title: _buildAppBar(),
-      ),
-      SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) => _buildBody(),
-          childCount: 1,
-        ),
-      )
+          SliverAppBar(
+            backgroundColor: AppColor.appBarColor,
+            pinned: true,
+            snap: true,
+            floating: true,
+            title: _buildAppBar(),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => _buildBody(),
+              childCount: 1,
+            ),
+          ),
+        //   SliverToBoxAdapter(
+        //     child: _bottomnavpages[selectedIndex],
+        // ),
+          // _bottomnavpages[selectedIndex],
         ],
       ),
+
       // Container(
       //     color: Colors.blueAccent,
       //     child: Center(
@@ -265,12 +271,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           _buildRecommended(),
+          // _bottomnavpages[selectedIndex],
         ],
       ),
     );
   }
 
-   _buildCategories() {
+  _buildCategories() {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
       scrollDirection: Axis.horizontal,
@@ -326,7 +333,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }
 
 class ExampleSidebarX extends StatelessWidget {

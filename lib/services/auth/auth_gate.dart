@@ -1,5 +1,5 @@
 import 'package:aerovania_app/Pages/side%20navigation%20bar/welcome_screen.dart';
-import 'package:aerovania_app/services/auth/login_or_register.dart';
+// import 'package:aerovania_app/services/auth/login_or_register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

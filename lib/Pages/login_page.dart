@@ -103,7 +103,7 @@
 
 
 import 'package:aerovania_app/Pages/forgot_password_screen.dart';
-import 'package:aerovania_app/Pages/register_page.dart';
+// import 'package:aerovania_app/Pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -296,13 +296,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 10,
               ),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Divider(
                       color: Color(0xFFE8ECF4),
