@@ -1,16 +1,17 @@
 import 'package:aerovania_app/Pages/bottom%20navigation%20bar/search_page.dart';
 import 'package:aerovania_app/Pages/side%20navigation%20bar/product_screen.dart';
+import 'package:aerovania_app/Pages/side%20navigation%20bar/edit_profile.dart';
 import 'package:aerovania_app/Pages/side%20navigation%20bar/settings_screen.dart';
-import 'package:aerovania_app/utils/data.dart';
-import 'package:aerovania_app/widgets/notification_box.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:aerovania_app/utils/data.dart';
+// import 'package:aerovania_app/widgets/notification_box.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:aerovania_app/components/color.dart';
-import 'package:aerovania_app/widgets/category_box.dart';
-import 'package:aerovania_app/widgets/feature_item.dart';
-import 'package:aerovania_app/widgets/recommend_item.dart';
+// import 'package:aerovania_app/widgets/category_box.dart';
+// import 'package:aerovania_app/widgets/feature_item.dart';
+// import 'package:aerovania_app/widgets/recommend_item.dart';
 import 'bottom navigation bar/cart_page.dart';
 import 'bottom navigation bar/favorite_page.dart';
 import 'side navigation bar/about_screen.dart';
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       //       )
       //     : null,
       drawer: ExampleSidebarX(controller: _controller),
-      backgroundColor: AppColor.appBgColor,
+      backgroundColor: const Color(0xffbfe0f8), //AppColor.appBgColor,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         index: selectedIndex,
@@ -117,7 +118,7 @@ class _HomePageState extends State<HomePage> {
         //   //Handle button tap
         // },
       ),
-      body:  Row(
+      body: Row(
         children: [
           // if (!isSmallScreen) ExampleSidebarX(controller: _controller),
           Expanded(
@@ -554,28 +555,28 @@ class ExampleSidebarX extends StatelessWidget {
 //   }
 // }
 
-_getTitleByIndex(int index) {
-  switch (index) {
-    case 0:
-      return 'Home';
-    case 1:
-      return 'Courses';
-    case 2:
-      return 'Products';
-    case 3:
-      return 'History';
-    case 4:
-      return 'Media';
-    case 5:
-      return 'Settings';
-    case 6:
-      return 'About';
-    case 7:
-      return 'Contact Us';
-    default:
-      return 'Not found page';
-  }
-}
+// _getTitleByIndex(int index) {
+//   switch (index) {
+//     case 0:
+//       return 'Home';
+//     case 1:
+//       return 'Courses';
+//     case 2:
+//       return 'Products';
+//     case 3:
+//       return 'History';
+//     case 4:
+//       return 'Media';
+//     case 5:
+//       return 'Settings';
+//     case 6:
+//       return 'About';
+//     case 7:
+//       return 'Contact Us';
+//     default:
+//       return 'Not found page';
+//   }
+// }
 
 const primaryColor = Color(0xFF685BFF);
 const canvasColor = Color(0xFF2E2E48);

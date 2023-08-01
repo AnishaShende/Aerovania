@@ -1,5 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aerovania_app/Pages/home_page.dart';
 import 'package:aerovania_app/components/color.dart';
 import 'package:aerovania_app/utils/data.dart';
 import 'package:aerovania_app/widgets/category_box.dart';
@@ -8,6 +9,8 @@ import 'package:aerovania_app/widgets/notification_box.dart';
 import 'package:aerovania_app/widgets/recommend_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:sidebarx/sidebarx.dart';
+import 'package:aerovania_app/Pages/home_page.dart';
 
 // import 'chat_page.dart';
 
@@ -19,16 +22,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = 0;
+  }
+
+  final _controller = SidebarXController(selectedIndex: 0, extended: true);
+
   // final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: ExampleSidebarX(controller: _controller),
+
       // body: _buildUserList(),
-      // backgroundColor: Colors.blueAccent,
+      backgroundColor: const Color(0xffbfe0f8),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            leading: IconButton(
+              onPressed: () {
+                // ExampleSidebarX(controller: _controller);
+                // _controller.setExtended(true);
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => _pages[_controller.selectedIndex]),
+                //   );
+                //   _pages[_controller.selectedIndex];
+                //   if (!Platform.isAndroid && !Platform.isIOS) {
+                //     _controller.setExtended(true);
+                //   }
+                //   _key.currentState?.openDrawer();
+                  Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(Icons.menu, color: Colors.black),
+            ),
             backgroundColor: AppColor.appBarColor,
             pinned: true,
             snap: true,
