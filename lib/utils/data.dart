@@ -7,39 +7,39 @@ var profile = {
 List categories = [
   {
     "name" : "All",
-    "icon" : "assets/icons/category/all.svg"
+    "icon" : "assets/icons/category/all.jpg"
   }, 
   {
     "name" : "Coding",
-    "icon" : "assets/icons/category/coding.svg"
+    "icon" : "assets/icons/category/coding.jpg"
   },
   {
     "name" : "Education",
-    "icon" : "assets/icons/category/education.svg"
+    "icon" : "assets/icons/category/education.jpg"
   },
   {
     "name" : "Design",
-    "icon" : "assets/icons/category/design.svg"
+    "icon" : "assets/icons/category/design.jpg"
   },
   {
     "name" : "Business",
-    "icon" : "assets/icons/category/business.svg"
+    "icon" : "assets/icons/category/business.jpg"
   },
-  {
-    "name" : "Cooking",
-    "icon" : "assets/icons/category/cooking.svg"
-  },
-  {
-    "name" : "Music",
-    "icon" : "assets/icons/category/music.svg"
-  },
-  {
-    "name" : "Art",
-    "icon" : "assets/icons/category/art.svg"
-  },
+  // {
+  //   "name" : "Cooking",
+  //   "icon" : "assets/icons/category/cooking.jpg"
+  // },
+  // {
+  //   "name" : "Music",
+  //   "icon" : "assets/icons/category/music.jpg"
+  // },
+  // {
+  //   "name" : "Art",
+  //   "icon" : "assets/icons/category/art.jpg"
+  // },
   {
     "name" : "Finance",
-    "icon" : "assets/icons/category/finance.svg"
+    "icon" : "assets/icons/category/finance.jpg"
   },
 ];
 

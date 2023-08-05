@@ -13,13 +13,13 @@ class MyButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade800,
-          borderRadius: BorderRadius.circular(9)
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(15)
         ),
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

@@ -1,11 +1,52 @@
 // import 'package:aerovania_app/Pages/login_page.dart';
 import 'package:aerovania_app/Pages/home_page.dart';
 import 'package:aerovania_app/services/auth/auth_gate.dart';
+import 'package:aerovania_app/services/auth/auth_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:login_signup_flow_app/screens/login_screen.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  var passwordVisible = false;
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  final nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    passwordVisible = true;
+  }
+
+  void signUp() async {
+    // if (passwordController.text != confirmPasswordController.text) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(content: Text("Passwords do not match!")));
+    //   return;
+    // }
+
+    final authServices = Provider.of<AuthServices>(context, listen: false);
+    try {
+      await authServices.signUpWithEmailAndPassword(
+          emailController.text, passwordController.text, nameController.text);
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +99,7 @@ class RegisterPage extends StatelessWidget {
                     right: 10,
                   ),
                   child: TextFormField(
+                    controller: nameController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Username',
@@ -89,6 +131,7 @@ class RegisterPage extends StatelessWidget {
                     right: 10,
                   ),
                   child: TextFormField(
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Email',
@@ -120,11 +163,25 @@ class RegisterPage extends StatelessWidget {
                     right: 10,
                   ),
                   child: TextFormField(
-                    decoration: const InputDecoration(
+                    controller: passwordController,
+                    obscureText: passwordVisible,
+                    decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Password',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xFF8391A1),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(
+                            () {
+                              passwordVisible = !passwordVisible;
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -132,36 +189,49 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            //confirm password
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF7F8F9),
-                  border: Border.all(
-                    color: const Color(0xFFE8ECF4),
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
-                    right: 10,
-                  ),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Confirm password',
-                      hintStyle: TextStyle(
-                        color: Color(0xFF8391A1),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // //confirm password
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(
+            //     horizontal: 20,
+            //   ),
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //       color: const Color(0xFFF7F8F9),
+            //       border: Border.all(
+            //         color: const Color(0xFFE8ECF4),
+            //       ),
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(
+            //         left: 10,
+            //         right: 10,
+            //       ),
+            //       child: TextFormField(
+            //         obscureText: passwordVisible,
+            //         decoration: InputDecoration(
+            //           border: InputBorder.none,
+            //           hintText: 'Confirm password',
+            //           hintStyle: const TextStyle(
+            //             color: Color(0xFF8391A1),
+            //           ),
+            //           suffixIcon: IconButton(
+            //             icon: Icon(passwordVisible
+            //                 ? Icons.visibility
+            //                 : Icons.visibility_off),
+            //             onPressed: () {
+            //               setState(
+            //                 () {
+            //                   passwordVisible = !passwordVisible;
+            //                 },
+            //               );
+            //             },
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 25),
             //register button
             Padding(
@@ -178,10 +248,7 @@ class RegisterPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()));
+                        signUp();
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(15.0),
@@ -234,23 +301,6 @@ class RegisterPage extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE8ECF4),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Image.asset(
-                          "assets/images/facebook.png",
-                          height: 32,
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Container(
@@ -270,23 +320,6 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE8ECF4),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Image.asset(
-                          "assets/images/apple.png",
-                          height: 32,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

@@ -29,6 +29,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       backgroundColor: const Color(0xffbfe0f8),
       appBar: AppBar(
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(color: Colors.black ,fontSize: 25, fontWeight: FontWeight.w500),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
         leading: IconButton(
@@ -61,10 +65,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
           child: ListView(
             children: [
-              const Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
+              // const Text(
+              //   "Edit Profile",
+              //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -194,7 +198,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   )
                 : null,
             contentPadding: const EdgeInsets.only(bottom: 3),
-            // labelText: labelText,
+            labelText: labelText,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: const TextStyle(

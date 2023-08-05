@@ -1,12 +1,16 @@
 // import 'package:aerovania_app/Pages/login_page.dart';
 import 'package:aerovania_app/Pages/otp_screen.dart';
+import 'package:aerovania_app/Pages/password_changed_screen.dart';
 import 'package:aerovania_app/services/auth/auth_gate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:login_signup_flow_app/screens/login_screen.dart';
 // import 'package:login_signup_flow_app/screens/otp_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +49,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 vertical: 10,
               ),
               child: Text(
-                "Don't worry! It occurs. Please enter the email address linked with your account.",
+                "Don't worry! It happens. Please enter the email address linked with your account.",
                 style: TextStyle(
                   color: Color(0xFF8391A1),
                   fontSize: 16,
@@ -73,6 +77,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     right: 10,
                   ),
                   child: TextFormField(
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter your email',
@@ -99,10 +104,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OTPScreen()));
+                        FirebaseAuth.instance
+                            .sendPasswordResetEmail(email: emailController.text)
+                            .then((value) => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const PasswordCreatedScreen())));
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(15.0),
@@ -119,7 +126,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
+            const SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

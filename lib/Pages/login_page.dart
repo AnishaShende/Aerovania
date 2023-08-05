@@ -1,115 +1,10 @@
-// import 'package:aerovania_app/components/my_button.dart';
-// import 'package:aerovania_app/components/my_text_field.dart';
-// import 'package:aerovania_app/services/auth/auth_servieces.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-
-// class LoginPage extends StatefulWidget {
-  // const LoginPage({super.key, required this.onTap});
-
-  // final void Function()? onTap;
-
-//   @override
-//   State<LoginPage> createState() => _LoginPageState();
-// }
-
-// class _LoginPageState extends State<LoginPage> {
-  // final emailController = TextEditingController();
-  // final passwordController = TextEditingController();
-
-  // void signIn() async {
-  //   final authServices = Provider.of<AuthServices>(context, listen: false);
-  //   try {
-  //     await authServices.signInWithEmailAndPassword(
-  //         emailController.text, passwordController.text);
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text(e.toString())));
-  //   }
-  // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Color(0xFFd4eeebff),
-//       body: SafeArea(
-//         child: Center(
-//           child: Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 const SizedBox(
-//                   height: 50,
-//                 ),
-//                 const Icon(
-//                   Icons.message,
-//                   size: 80,
-//                   color: Color(0xFF0bcdcd),
-//                 ),
-//                 const SizedBox(
-//                   height: 50,
-//                 ),
-//                 const Text(
-//                   "Welcome back you've been missed!",
-//                   style: TextStyle(fontSize: 16),
-//                 ),
-//                 const SizedBox(
-//                   height: 25,
-//                 ),
-//                 MyTextField(
-//                   controller: emailController,
-//                   hintText: 'Email',
-//                   obscureText: false,
-//                 ),
-//                 const SizedBox(
-//                   height: 10,
-//                 ),
-//                 MyTextField(
-//                     controller: passwordController,
-//                     hintText: 'Password',
-//                     obscureText: true),
-//                 const SizedBox(
-//                   height: 25,
-//                 ),
-//                 MyButton(onTap: signIn, text: "Sign In"),
-//                 const SizedBox(
-//                   height: 50,
-//                 ),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     const Text('Not a member?'),
-//                     const SizedBox(
-//                       width: 5,
-//                     ),
-//                     GestureDetector(
-//                       onTap: widget.onTap,
-//                       child: const Text(
-//                         'Register now',
-//                         style: TextStyle(fontWeight: FontWeight.bold),
-//                       ),
-//                     ),
-//                   ],
-//                 )
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
 import 'package:aerovania_app/Pages/forgot_password_screen.dart';
-// import 'package:aerovania_app/Pages/register_page.dart';
+import 'package:aerovania_app/Pages/home_page.dart';
+import 'package:aerovania_app/Pages/side%20navigation%20bar/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth/auth_services.dart';
-// import 'package:login_signup_flow_app/screens/forgot_password_screen.dart';
-// import 'package:login_signup_flow_app/screens/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.onTap});
@@ -121,7 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -130,10 +24,21 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await authServices.signInWithEmailAndPassword(
           emailController.text, passwordController.text);
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
     }
+  }
+
+  var passwordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordVisible = true;
   }
 
   @override
@@ -187,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     right: 10,
                   ),
                   child: TextFormField(
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter your email',
@@ -218,16 +124,35 @@ class _LoginPageState extends State<LoginPage> {
                     right: 10,
                   ),
                   child: TextFormField(
-                    decoration: const InputDecoration(
+                    controller: passwordController,
+                    obscureText: passwordVisible,
+                    // keyboardType: TextInputType.visiblePassword,
+                    // textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter your password',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xFF8391A1),
                       ),
-                      suffixIcon: Icon(
-                        Icons.remove_red_eye,
-                        color: Color(0xFF8391A1),
+                      suffixIcon: IconButton(
+                        icon: Icon(passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(
+                            () {
+                              passwordVisible = !passwordVisible;
+                            },
+                          );
+                        },
                       ),
+                      // alignLabelWithHint: false,
+                      // filled: true,
+                      //  ),
+                      // Icon(
+                      //   Icons.visibility,
+                      //   color: Color(0xFF8391A1),
+                      // ),
                     ),
                   ),
                 ),
@@ -247,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const ForgotPasswordScreen()));
+                                ForgotPasswordScreen()));
                   },
                   child: const Text(
                     "Forgot Password?",
@@ -273,13 +198,9 @@ class _LoginPageState extends State<LoginPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      onPressed: signIn,
-                      // () {
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const LoginPage()));
-                      // },
+                      onPressed: () {
+                        signIn();
+                      },
                       child: const Padding(
                         padding: EdgeInsets.all(15.0),
                         child: Text(
@@ -331,23 +252,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE8ECF4),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Image.asset(
-                          "assets/images/facebook.png",
-                          height: 32,
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Container(
@@ -366,28 +270,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE8ECF4),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Image.asset(
-                          "assets/images/apple.png",
-                          height: 32,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(width: 20),
                 ],
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -400,12 +287,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: widget.onTap,
-                  // () {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => const RegisterPage(onTap: widget.onTap,)));
-                  // },
                   child: const Text(
                     "Register",
                     style: TextStyle(

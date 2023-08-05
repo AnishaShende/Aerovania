@@ -50,6 +50,8 @@ dependencies:
   badges: ^3.1.1
   carousel_slider: ^4.0.0
   settings_ui: ^2.0.2
+  url_launcher: ^6.1.12
+  
   # flutter_carousel_slider: ^1.1.0
 
 dev_dependencies:
@@ -78,7 +80,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/icons/categories/
+    - assets/icons/category/
+    - assets/icons/social/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

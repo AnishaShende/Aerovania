@@ -1,5 +1,6 @@
 import 'package:aerovania_app/Pages/home_page.dart';
 import 'package:aerovania_app/Pages/login_page.dart';
+import 'package:aerovania_app/components/my_button.dart';
 import 'package:flutter/material.dart';
 
 import '../register_page.dart';
@@ -96,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RegisterPage(
+                                builder: (context) => RegisterPage(
                                     // onTap: togglePage,
                                     )));
                       },
@@ -115,19 +116,49 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ],
               ),
             ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomePage()));
-              },
-              child: const Text(
-                "Continue as a guest",
-                style: TextStyle(
-                  color: Color(0xFF35C2C1),
-                ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: Color(0xFFE8ECF4),
+                      thickness: 1,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    child: Text(
+                      "OR",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: Color(0xFFE8ECF4),
+                      thickness: 1,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
+              child: MyButton(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                },
+                text: 'Continue as a guest',
               ),
             ),
             const Spacer(),

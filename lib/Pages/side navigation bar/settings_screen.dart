@@ -1,6 +1,9 @@
 import 'package:aerovania_app/Pages/side%20navigation%20bar/edit_profile.dart';
+import 'package:aerovania_app/Pages/side%20navigation%20bar/welcome_screen.dart';
+import 'package:aerovania_app/services/auth/auth_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -15,6 +18,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffbfe0f8),
       appBar: AppBar(
+        title: Text(
+              "Settings",
+              style: TextStyle(color: Colors.black ,fontSize: 25, fontWeight: FontWeight.w500),
+            ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         // backgroundColor: const Color(0xffbfe0f8),
         elevation: 1,
@@ -30,29 +37,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
-        child: ListView(
+        child: Column(
           children: [
-            const Text(
-              "Settings",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-            ),
             const SizedBox(
               height: 40,
             ),
-            const Row(
-              children: [
-                Icon(
-                  Icons.person,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Account",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Account",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             const Divider(
               height: 15,
@@ -96,20 +102,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(
               height: 40,
             ),
-            const Row(
-              children: [
-                Icon(
-                  Icons.volume_up_outlined,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Notifications",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.volume_up_outlined,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Notifications",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             const Divider(
               height: 15,
@@ -127,12 +136,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Center(
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                 ),
-                onPressed: () {},
-                child: const Text("SIGN OUT",
+                onPressed: () {
+                  signOut();
+                },
+                child: const Text("Sign Out",
                     style: TextStyle(
                         fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
               ),
@@ -212,5 +224,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  void signOut() {
+    // Navigator.of(context).pop();
+    final authServices = Provider.of<AuthServices>(context, listen: false);
+    authServices.signOut();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()));
   }
 }
