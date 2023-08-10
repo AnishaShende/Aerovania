@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _buildFeatured() {
+  _buildFeatured() { 
     return CarouselSlider(
       options: CarouselOptions(
         height: 290,
