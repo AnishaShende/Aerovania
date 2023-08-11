@@ -28,7 +28,7 @@ class BookmarkBox extends StatelessWidget {
         ),
         child: Image.asset(
           "assets/icons/bookmark.jpg",
-          color: isBookmarked ? Colors.white : AppColor.primary,
+          // color: isBookmarked ? Colors.white : AppColor.primary,
           width: 25,
           height: 25,
         ),

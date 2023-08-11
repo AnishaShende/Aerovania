@@ -1,5 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aerovania_app/Pages/course_details.dart';
 import 'package:aerovania_app/Pages/home_page.dart';
 import 'package:aerovania_app/components/color.dart';
 import 'package:aerovania_app/utils/data.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //     _controller.setExtended(true);
                 //   }
                 //   _key.currentState?.openDrawer();
-                  Scaffold.of(context).openDrawer();
+                Scaffold.of(context).openDrawer();
               },
               icon: const Icon(Icons.menu, color: Colors.black),
             ),
@@ -190,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _buildFeatured() { 
+  _buildFeatured() {
     return CarouselSlider(
       options: CarouselOptions(
         height: 290,
@@ -203,6 +204,12 @@ class _HomeScreenState extends State<HomeScreen> {
         (index) => FeatureItem(
           // key: ValueKey(features[index].id), // Added
           data: features[index],
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => CourseDetails(
+                      data: {"course": features[index]},
+                    ))));
+          },
         ),
       ),
     );

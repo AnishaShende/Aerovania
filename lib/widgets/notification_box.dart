@@ -51,8 +51,8 @@ class NotificationBox extends StatelessWidget {
   }
 
   Widget _buildIcon() {
-    return SvgPicture.asset(
-      "assets/icons/bell.svg",
+    return Image.asset(
+      "assets/icons/bell.jpg",
       width: 20,
       height: 20,
     );

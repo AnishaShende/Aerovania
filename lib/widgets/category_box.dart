@@ -40,9 +40,9 @@ class CategoryBox extends StatelessWidget {
               ],
               shape: BoxShape.circle,
             ),
-            child: SvgPicture.asset(
+            child: Image.asset(
               data["icon"],
-              color: isSelected ? selectedColor : AppColor.textColor,
+              // color: isSelected ? selectedColor : AppColor.textColor,
               width: 30,
               height: 30,
             ),

@@ -21,6 +21,8 @@ class CategoryItems extends StatelessWidget {
       body: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
+          // height: MediaQuery.of(context).size.height * .03,
+          // width: MediaQuery.of(context).size.width * .05,
           duration: const Duration(milliseconds: 500),
           curve: Curves.fastOutSlowIn,
           padding: const EdgeInsets.all(12),
