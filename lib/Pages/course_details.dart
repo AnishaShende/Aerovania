@@ -1,5 +1,5 @@
-import 'package:aerovania_app/Pages/bookmark_box.dart';
-import 'package:aerovania_app/Pages/lesson_items.dart';
+import 'package:aerovania_app/components/bookmark_box.dart';
+import 'package:aerovania_app/components/lesson_items.dart';
 import 'package:aerovania_app/components/color.dart';
 import 'package:aerovania_app/components/my_button.dart';
 import 'package:aerovania_app/utils/data.dart';

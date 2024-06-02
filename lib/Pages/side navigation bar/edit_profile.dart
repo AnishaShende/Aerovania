@@ -148,7 +148,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
+                      backgroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       elevation: 2,
                       shape: RoundedRectangleBorder(

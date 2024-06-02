@@ -10,13 +10,11 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       // body: _buildUserList(),
       backgroundColor: Colors.blueAccent,
       body: Center(
-        child: Container(
-          child: Text("Favorite Screen"),
-        ),
+        child: Text("Favorite Screen"),
       ),
     );
   }

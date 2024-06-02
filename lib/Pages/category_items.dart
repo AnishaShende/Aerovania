@@ -21,8 +21,8 @@ class CategoryItems extends StatelessWidget {
       body: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
-          // height: MediaQuery.of(context).size.height * .03,
-          // width: MediaQuery.of(context).size.width * .05,
+          height: MediaQuery.of(context).size.height * .06,
+          width: MediaQuery.of(context).size.width * .2,
           duration: const Duration(milliseconds: 500),
           curve: Curves.fastOutSlowIn,
           padding: const EdgeInsets.all(12),
@@ -43,15 +43,17 @@ class CategoryItems extends StatelessWidget {
             children: [
               Image(
                 image: NetworkImage(data["icon"]),
+                height: MediaQuery.of(context).size.height * .02,
+                width: MediaQuery.of(context).size.width * .02,
                 color: isActive ? Colors.white : AppColor.darker,
               ),
-              const SizedBox(
-                width: 5,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .01,
               ),
               Text(
                 data["name"],
                 style:
-                    TextStyle(color: isActive ? Colors.white : AppColor.darker),
+                    TextStyle(color: isActive ? Colors.white : AppColor.darker, fontSize: 9),
               ),
             ],
           ),

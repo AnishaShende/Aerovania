@@ -1,5 +1,6 @@
 import 'package:aerovania_app/components/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BookmarkBox extends StatelessWidget {
   BookmarkBox({super.key, this.onTap, this.isBookmarked = false});
@@ -11,9 +12,9 @@ class BookmarkBox extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: isBookmarked ? AppColor.primary : Colors.white,
           shape: BoxShape.circle,
@@ -26,8 +27,10 @@ class BookmarkBox extends StatelessWidget {
             ),
           ],
         ),
-        child: Image.asset(
-          "assets/icons/bookmark.jpg",
+        child: SvgPicture.asset(
+          "assets/icons/bookmark.svg",
+          theme: SvgTheme(
+              currentColor: isBookmarked ? Colors.white : AppColor.primary),
           // color: isBookmarked ? Colors.white : AppColor.primary,
           width: 25,
           height: 25,
